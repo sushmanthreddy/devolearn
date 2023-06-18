@@ -31,7 +31,7 @@ class lineage_population_model(InferenceEngine):
             device (str, optional): set to "cuda", runs operations on gpu and set to "cpu", runs operations on cpu. Defaults to "cpu".
         """
         self.device = device
-        self.model = models.resnet18(pretrained = True)
+        self.model = models.resnet18(weights=torchvision.models.resnet.ResNet18_Weights.IMAGENET1K_V1)
         self.model.fc = nn.Linear(512, 7)  ## resize last layer
         self.model_dir = os.path.dirname(__file__)
         self.scaler = joblib.load(self.model_dir + "/" + 'scaler/scaler.gz')
